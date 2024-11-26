@@ -1,3 +1,5 @@
+import 'dotenv/config';
+import { ObjectId } from "mongodb";
 import conectarAoBanco from "../config/dbConfig.js";
 // Importa a função para conectar ao banco de dados, definida em dbConfig.js.
 
@@ -24,4 +26,18 @@ export async function criarPost(novoPost) {
 
     return colecao.insertOne(novoPost);
     //Execute an operation to insert a new post in the collection.
+};
+
+// Function to conect to the database and upload/insert a new post in the collection "posts".
+export async function atualizarPost(id, post) {
+  const db = conexao.db("imersao-instalike");
+  // Obtém o banco de dados chamado "imersao-instalike" da conexão estabelecida.
+
+  const colecao = db.collection("posts");
+  // Obtém a coleção "posts" dentro do banco de dados.
+
+  const objID = ObjectId.createFromHexString(id);
+
+  return colecao.updateOne({_id: new ObjectId(objID)}, {$set:post});
+  //Execute an operation to insert a new post in the collection.
 };

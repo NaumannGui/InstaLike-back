@@ -10,7 +10,12 @@ import fs from "fs";
 const app = express();
 // Cria uma instância do Express, que será o nosso servidor web.
 
+app.use(express.static("uploads"));
+// Disponibiliza a pasta "uploads" para servir seus arquivos estáticos publicamente.
+
 routes(app);
+// Usa o servidor "app" ("req/res") como parâmetros para executar as funções de routes.
+
 
 app.listen(3000, () => {
   console.log("Servidor escutando...");
